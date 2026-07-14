@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Aplicaciones — Adultos Mayores</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%235B2D8E%22%2F%3E%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%237B3FA0%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23D4568C%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22url%28%23bg%29%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%226%22%20width%3D%2212%22%20height%3D%2220%22%20rx%3D%222.5%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.7%22%2F%3E%3Crect%20x%3D%2212.5%22%20y%3D%229%22%20width%3D%227%22%20height%3D%229.5%22%20rx%3D%221%22%20fill%3D%22%23FFD6EC%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2223%22%20r%3D%221.1%22%20fill%3D%22%23FFD6EC%22%2F%3E%3C%2Fsvg%3E" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#5B2D8E;--purple-mid:#7B4BAF;--purple-light:#F0E6FA;
+  --pink:#D4568C;--pink-light:#FDE8F2;
+  --cream:#FDF8FC;--white:#FFFFFF;
+  --text:#2D1B3D;--muted:#7A6289;--border:#E8D5EF;
+  --shadow:0 2px 18px rgba(91,45,142,0.09)
+}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);font-size:18px;line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,iframe,video{max-width:100%}
+/* ── HEADER ── */
+header{background:linear-gradient(135deg,var(--purple) 0%,#7B3FA0 55%,var(--pink) 100%);padding:0}
+.header-inner{max-width:1100px;margin:0 auto;padding:44px 32px 36px;display:flex;flex-direction:column;gap:10px}
+header h1{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:700;color:#fff;letter-spacing:0.01em;line-height:1.2}
+header h1 span{color:#FFD6EC}
+header p{color:#F0D4EA;font-size:1.05rem;font-weight:400}
+.header-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:4px}
+.header-meta span{font-size:0.9rem;color:#E8B8D8;display:flex;align-items:center;gap:6px}
+
+/* ── NAV / CATEGORÍAS ── */
+.nav-bar{background:var(--white);border-bottom:1.5px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(91,45,142,0.06)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.cat-btn{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:14px 20px;border:none;background:none;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.cat-btn.active,.cat-btn:hover{color:var(--purple);border-bottom-color:var(--pink)}
+.cat-btn .cat-icon{font-size:1.2rem}
+
+/* ── MAIN ── */
+main{max-width:1100px;margin:0 auto;padding:48px 32px 60px}
+.section{margin-bottom:64px;scroll-margin-top:70px}
+.section.hidden{display:none}
+.section-label{display:flex;align-items:center;gap:14px;margin-bottom:32px}
+.section-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.section-info h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--purple)}
+.section-info p{font-size:0.9rem;color:var(--muted);margin-top:2px}
+.section-divider{height:2px;background:linear-gradient(90deg,var(--pink) 0%, var(--pink-light) 60%, transparent 100%);margin-bottom:28px;border-radius:2px}
+
+/* ── TUTORIAL CARD ── */
+.tutorials{display:flex;flex-direction:column;gap:28px}
+.tcard{background:var(--white);border-radius:18px;border:1.5px solid var(--border);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s}
+.tcard:hover{box-shadow:0 6px 30px rgba(91,45,142,0.13)}
+.video-side{background:#000;width:100%;position:relative;overflow:hidden;flex-shrink:0;aspect-ratio:16/9}
+.video-side::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 60% 40%,rgba(212,86,140,0.35) 0%,rgba(91,45,142,1) 70%);pointer-events:none}
+.video-placeholder{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px;background:#000 center/contain no-repeat;transition:opacity .3s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+.video-placeholder::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(91,45,142,0.25) 0%,rgba(45,27,61,0.55) 100%);z-index:0}
+.video-placeholder > *{position:relative;z-index:1}
+.video-side[data-src] .video-placeholder{cursor:pointer}
+
+/* Botón de reproducir */
+.play-btn{width:72px;height:72px;border-radius:50%;background:rgba(212,86,140,0.35);border:2.5px solid var(--pink);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;backdrop-filter:blur(2px);flex-shrink:0;position:relative}
+.play-btn:hover{background:var(--pink);border-color:var(--pink)}
+.play-btn svg{width:28px;height:28px;fill:#fff;margin-left:4px;display:block;transition:opacity .2s}
+
+/* Estado "cargando": flecha desaparece, spinner aparece dentro del mismo botón */
+.video-side.is-loading .play-btn{animation:pulse-ring 1.2s ease-out infinite;background:rgba(0,0,0,0.45)}
+.video-side.is-loading .play-btn svg{opacity:0}
+.video-side.is-loading .play-btn::after{content:'';position:absolute;inset:12px;border:2.5px solid rgba(255,255,255,0.25);border-top-color:#fff;border-radius:50%;animation:spin .75s linear infinite}
+@keyframes pulse-ring{0%,100%{box-shadow:0 0 0 0 rgba(212,86,140,.5)}50%{box-shadow:0 0 0 10px rgba(212,86,140,0)}}
+
+.video-title{color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;text-align:center;line-height:1.3;text-shadow:0 1px 8px rgba(0,0,0,0.35);max-width:90%}
+.video-note{color:#F0D4EA;font-size:0.82rem;text-align:center;font-style:italic;text-shadow:0 1px 4px rgba(0,0,0,0.3);max-width:90%;transition:opacity .2s}
+.video-side.is-loading .video-note{opacity:0}
+.video-note-mobile{display:none}
+.video-note-desktop{display:block}
+
+/* iframe siempre presente en el DOM (z-index bajo), se eleva al reproducir */
+.video-iframe-wrap{position:absolute;inset:0;z-index:2;width:100%;height:100%;background:#000;-webkit-overflow-scrolling:touch;overflow:hidden;display:block;opacity:0;pointer-events:none;transition:opacity .25s}
+.video-side.is-playing::before{display:none}
+.video-side.is-playing .video-placeholder{pointer-events:none;opacity:0}
+.video-side.is-playing .video-iframe-wrap{opacity:1;pointer-events:auto}
+.video-iframe-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block;background:#000}
+.video-close-btn{display:none;position:absolute;top:12px;right:12px;z-index:10;width:44px;height:44px;border:none;border-radius:50%;background:rgba(0,0,0,0.65);color:#fff;font-size:1.35rem;line-height:1;cursor:pointer;align-items:center;justify-content:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.video-side.is-playing .video-close-btn{display:flex}
+.info-side{padding:28px 30px;display:flex;flex-direction:column;gap:18px}
+.tcard-header{display:flex;align-items:flex-start;gap:12px}
+.tnum{width:32px;height:32px;border-radius:8px;background:var(--pink-light);color:var(--pink);font-weight:600;font-size:0.95rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px;border:1.5px solid #F5C0D8}
+.tcard-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--purple);line-height:1.25}
+.steps-label{font-size:0.78rem;font-weight:600;color:var(--pink);text-transform:uppercase;letter-spacing:0.08em;display:flex;align-items:center;gap:6px}
+.steps-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.steps{display:flex;flex-direction:column;gap:10px}
+.step{display:flex;gap:12px;align-items:flex-start}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-size:0.82rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-text{font-size:0.97rem;color:var(--text);line-height:1.55;padding-top:2px}
+.tip-box{background:var(--pink-light);border-left:3.5px solid var(--pink);border-radius:0 10px 10px 0;padding:10px 16px;font-size:0.88rem;color:#6B3060;font-style:italic}
+
+/* ── SPIN keyframe ── */
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* ── SOUND HINT (iOS) ── */
+.sound-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.72);color:#fff;padding:7px 18px;border-radius:20px;font-size:0.8rem;white-space:nowrap;z-index:20;opacity:0;transition:opacity .35s;pointer-events:none;backdrop-filter:blur(4px)}
+.sound-hint.show{opacity:1}
+
+/* ── FOOTER ── */
+footer{background:linear-gradient(135deg,var(--purple) 0%,#6A3588 100%);color:#D4A8CC;text-align:center;padding:28px 24px;font-size:0.92rem}
+footer strong{color:#fff}
+
+/* ── RESPONSIVE — tablet y móvil ── */
+@media(max-width:1024px){
+  .video-side,.video-side.is-playing{aspect-ratio:16/9;width:100%;max-height:none;margin:0}
+  .video-placeholder{background-size:cover;background-position:center}
+  .video-placeholder::after{background:linear-gradient(180deg,rgba(91,45,142,0.12) 0%,rgba(45,27,61,0.3) 100%)}
+  .video-side.has-poster .video-title,.video-side.has-poster .video-note{display:none}
+  .video-side.has-poster .play-btn{width:56px;height:56px;background:rgba(0,0,0,0.45);border-color:rgba(255,255,255,0.8)}
+}
+@media(max-width:750px){
+  .video-side.is-playing .video-close-btn{top:max(6px,env(safe-area-inset-top));right:max(6px,env(safe-area-inset-right))}
+  body{font-size:16px}
+  header h1{font-size:1.75rem}
+  header p{font-size:0.95rem;line-height:1.5}
+  main{padding:24px 12px 40px}
+  .header-inner{padding:28px 16px 24px}
+  .nav-inner{padding:0 8px}
+  .cat-btn{padding:12px 14px;font-size:0.88rem;gap:6px}
+  .section{margin-bottom:40px;scroll-margin-top:56px}
+  .section-label{gap:10px;margin-bottom:20px}
+  .section-icon{width:40px;height:40px;font-size:1.25rem;border-radius:10px}
+  .section-info h2{font-size:1.4rem;line-height:1.2}
+  .section-info p{font-size:0.85rem}
+  .tutorials{gap:20px}
+  .tcard{border-radius:14px;max-width:100%}
+  .video-placeholder{padding:16px 12px;gap:10px}
+  .play-btn{width:58px;height:58px;border-width:2px}
+  .play-btn svg{width:22px;height:22px;margin-left:3px}
+  .video-title{font-size:1rem;line-height:1.25}
+  .video-note{font-size:0.75rem}
+  .video-note-mobile{display:block}
+  .video-note-desktop{display:none}
+  .info-side{padding:20px 16px;gap:14px}
+  .tcard-title{font-size:1.15rem}
+  .tnum{width:28px;height:28px;font-size:0.88rem}
+  .step-text{font-size:0.92rem;line-height:1.5}
+  .tip-box{font-size:0.84rem;padding:10px 12px}
+  footer{padding:22px 16px;font-size:0.88rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>Guía de <span>Aplicaciones</span> Digitales</h1>
+    <p>Tutoriales paso a paso para usar las aplicaciones más importantes de su teléfono</p>
+  </div>
+</header>
+
+<nav class="nav-bar" id="main-nav">
+  <div class="nav-inner">
+    <button class="cat-btn active" onclick="filterCategory('all',this)"><span class="cat-icon">📋</span> Todos</button>
+    <button class="cat-btn" onclick="filterCategory('salud',this)"><span class="cat-icon">🏥</span> EDUS — Salud</button>
+    <button class="cat-btn" onclick="filterCategory('banco',this)"><span class="cat-icon">🏦</span> Banco Nacional</button>
+    <button class="cat-btn" onclick="filterCategory('transporte',this)"><span class="cat-icon">🚗</span> Uber</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ══════════════ SALUD ══════════════ -->
+  <section class="section" id="salud">
+    <div class="section-label">
+      <div class="section-icon">🏥</div>
+      <div class="section-info">
+        <h2>EDUS — Portal de Salud CCSS</h2>
+        <p>Plataforma oficial de la Caja Costarricense de Seguro Social</p>
+      </div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="tutorials">
+
+      <div class="tcard">
+        <div class="video-side" data-src="https://www.canva.com/design/DAHOeOmKvg0/LLOVM2bC7_2FyWCUgtzttQ/watch?embed&utm_content=DAHOeOmKvg0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h139c84040c">
+          <div class="video-placeholder">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="video-title">¿Cómo cambiar mi<br>contraseña de EDUS?</div>
+            <div class="video-note video-note-desktop">Video tutorial · grabación de pantalla</div>
+            <div class="video-note video-note-mobile">Toca ▶ para reproducir</div>
+          </div>
+          <div class="video-iframe-wrap">
+            <iframe title="¿Cómo cambiar mi contraseña de EDUS?" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; web-share" allowfullscreen></iframe>
+          </div>
+          <button type="button" class="video-close-btn" aria-label="Cerrar video">✕</button>
+        </div>
+        <div class="info-side">
+          <div class="tcard-header">
+            <div class="tnum">1</div>
+            <div class="tcard-title">¿Cómo cambiar mi contraseña de EDUS?</div>
+          </div>
+          <div class="steps-label">Pasos a seguir</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Abrir la aplicación <strong>EDUS</strong> en su teléfono y llegar a la pantalla de inicio de sesión.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Tocar el enlace que dice <strong>"¿Olvidó su contraseña?"</strong> que aparece debajo del botón de ingresar.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Ingresar su <strong>número de cédula</strong> en el campo correspondiente".</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">Ingresar su <strong>correo electrónico</strong> asociado a su cuenta".</div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-text">Ingresar el código de seguridad de 6 caracteres que se presenta en la pantalla.</div></div>
+            <div class="step"><div class="step-num">6</div><div class="step-text">Tocar el botón <strong>"Continuar"</strong> para verificar que el código es correcto.</div></div>
+            <div class="step"><div class="step-num">7</div><div class="step-text">Esperar a que el correo electrónico con el enlace para cambiar la contraseña llegue a su bandeja de entrada.</div></div>
+            <div class="step"><div class="step-num">8</div><div class="step-text">Tocar el enlace que dice <strong>"Cambiar contraseña"</strong> para ingresar la nueva contraseña.</div></div>
+            <div class="step"><div class="step-num">9</div><div class="step-text">Escribir su <strong>nueva contraseña</strong> (debe tener al menos 8 caracteres, incluir letras y números) y confirmarla.</div></div>
+            <div class="step"><div class="step-num">7</div><div class="step-text">Tocar <strong>"Guardar"</strong>. Aparecerá un mensaje confirmando que el cambio fue exitoso.</div></div>
+          </div>
+          <div class="tip-box">💡 Anote su nueva contraseña en un lugar seguro en casa antes de cerrar la aplicación.</div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="video-side" data-src="https://www.canva.com/design/DAHOfYKK_UA/KP25LIaCEXHSX_PcKie0mg/watch?embed&utm_content=DAHOfYKK_UA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h106169e77e">
+          <div class="video-placeholder">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="video-title">¿Cómo pedir mis recetas<br>médicas por EDUS?</div>
+            <div class="video-note video-note-desktop">Video tutorial · grabación de pantalla</div>
+            <div class="video-note video-note-mobile">Toca ▶ para reproducir</div>
+          </div>
+          <div class="video-iframe-wrap">
+            <iframe title="¿Cómo pedir mis recetas médicas por EDUS?" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; web-share" allowfullscreen></iframe>
+          </div>
+          <button type="button" class="video-close-btn" aria-label="Cerrar video">✕</button>
+        </div>
+        <div class="info-side">
+          <div class="tcard-header">
+            <div class="tnum">2</div>
+            <div class="tcard-title">¿Cómo pedir mis recetas médicas a través del EDUS?</div>
+          </div>
+          <div class="steps-label">Pasos a seguir</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Abrir la aplicación <strong>EDUS</strong> e iniciar sesión con su cédula y contraseña.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">En el menú principal, tocar la opción <strong>"Mis servicios"</strong> o buscar el ícono de recetas.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Seleccionar <strong>"Solicitar receta"</strong>. El sistema mostrará la lista de medicamentos recetados anteriormente.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">Elegir el <strong>medicamento</strong> que necesita. Puede seleccionar más de uno en la misma solicitud.</div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-text">Confirmar o elegir la <strong>farmacia CCSS</strong> donde desea retirar sus medicamentos.</div></div>
+            <div class="step"><div class="step-num">6</div><div class="step-text">Tocar <strong>"Confirmar solicitud"</strong> y guardar o fotografiar el número de solicitud que aparece.</div></div>
+            <div class="step"><div class="step-num">7</div><div class="step-text">En 24 a 48 horas hábiles, sus medicamentos estarán listos para retirar en la farmacia seleccionada.</div></div>
+          </div>
+          <div class="tip-box">💡 Solo puede solicitar receta de medicamentos que ya han sido recetados por su médico de cabecera de la CCSS.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ BANCO ══════════════ -->
+  <section class="section" id="banco">
+    <div class="section-label">
+      <div class="section-icon">🏦</div>
+      <div class="section-info">
+        <h2>Banco Nacional — BN Móvil</h2>
+        <p>Aplicación oficial del Banco Nacional de Costa Rica</p>
+      </div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="tutorials">
+
+      <div class="tcard">
+        <div class="video-side" data-src="https://www.canva.com/design/DAHOfVcCN2c/ZJ4GhXN09VxILDjrwtOiqg/watch?embed&utm_content=DAHOfVcCN2c&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hf2a79d14ba">
+          <div class="video-placeholder">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="video-title">¿Cómo cambiar mi contraseña<br>en la app del BN?</div>
+            <div class="video-note video-note-desktop">Video tutorial · grabación de pantalla</div>
+            <div class="video-note video-note-mobile">Toca ▶ para reproducir</div>
+          </div>
+          <div class="video-iframe-wrap">
+            <iframe title="¿Cómo cambiar mi contraseña en la aplicación del Banco Nacional?" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; web-share" allowfullscreen></iframe>
+          </div>
+          <button type="button" class="video-close-btn" aria-label="Cerrar video">✕</button>
+        </div>
+        <div class="info-side">
+          <div class="tcard-header">
+            <div class="tnum">3</div>
+            <div class="tcard-title">¿Cómo cambiar mi contraseña en la aplicación del Banco Nacional?</div>
+          </div>
+          <div class="steps-label">Pasos a seguir</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Abrir la aplicación <strong>BN Móvil</strong> e iniciar sesión con su usuario y contraseña actual.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Tocar el ícono de <strong>configuración ⚙️</strong> o el menú con su nombre en la esquina superior.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Seleccionar <strong>"Seguridad"</strong> y luego <strong>"Cambiar contraseña"</strong>.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text">Ingresar su <strong>contraseña actual</strong> para confirmar su identidad.</div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-text">Escribir su <strong>nueva contraseña</strong>: debe tener al menos 8 caracteres, una letra mayúscula y un número.</div></div>
+            <div class="step"><div class="step-num">6</div><div class="step-text">Repetir la nueva contraseña en el campo <strong>"Confirmar"</strong> para verificar que es correcta.</div></div>
+            <div class="step"><div class="step-num">7</div><div class="step-text">Tocar <strong>"Confirmar cambio"</strong>. Llegará un mensaje de texto al número registrado confirmando el cambio.</div></div>
+          </div>
+          <div class="tip-box">💡 Nunca comparta su contraseña bancaria. El Banco Nacional nunca le pedirá su clave por llamada, mensaje o correo.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════ TRANSPORTE ══════════════ -->
+  <section class="section" id="transporte">
+    <div class="section-label">
+      <div class="section-icon">🚗</div>
+      <div class="section-info">
+        <h2>Uber — Transporte</h2>
+        <p>Cómo sacarle el mayor provecho a la aplicación de transporte</p>
+      </div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="tutorials">
+
+      <div class="tcard">
+        <div class="video-side" data-src="https://www.canva.com/design/DAHOfYmKX_o/MUJtOlWRUjjmWONQS2nKxw/watch?embed&utm_content=DAHOfYmKX_o&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6909ba2e31">
+          <div class="video-placeholder">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="video-title">¿Cómo añadir múltiples<br>paradas en Uber?</div>
+            <div class="video-note video-note-desktop">Video tutorial · grabación de pantalla</div>
+            <div class="video-note video-note-mobile">Toca ▶ para reproducir</div>
+          </div>
+          <div class="video-iframe-wrap">
+            <iframe title="¿Cómo añadir múltiples paradas en Uber?" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; web-share" allowfullscreen></iframe>
+          </div>
+          <button type="button" class="video-close-btn" aria-label="Cerrar video">✕</button>
+        </div>
+        <div class="info-side">
+          <div class="tcard-header">
+            <div class="tnum">4</div>
+            <div class="tcard-title">¿Cómo añadir múltiples paradas en un viaje en Uber?</div>
+          </div>
+          <div class="steps-label">Pasos a seguir</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Seleccionar el destino.</strong> Para comenzar, abra la aplicación de <strong>Uber</strong> y seleccione el campo <strong>"¿A dónde vas?"</strong> para indicar el destino principal de su viaje.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Agregar una parada.</strong> A continuación, pulse el signo más <strong>(+)</strong> que aparece junto al destino. Esta opción le permitirá agregar una o varias paradas antes de llegar al destino final.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Añadir las paradas.</strong> Ingrese cada una de las paradas que necesite realizar durante el recorrido. Puede modificar el orden o agregar más paradas según sea necesario antes de solicitar el viaje.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Confirmar el viaje.</strong> Una vez que haya configurado todas las paradas, seleccione el tipo de Uber que prefiera y presione <strong>"Confirmar"</strong> para solicitar el viaje. El conductor recibirá el recorrido completo con todas las paradas incluidas.</div></div>
+          </div>
+          <div class="tip-box">💡 El precio mostrado ya incluye todas las paradas. No olvide indicarle al conductor en cuál parada debe detenerse.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>Guía de Aplicaciones Digitales para Adultos Mayores</strong><br>
+  Si tiene alguna duda, consulte a su familiar o persona de confianza antes de realizar cualquier cambio en sus cuentas.
+</footer>
+
+<script>
+/* ── Utilidades ─────────────────────────────────────────────── */
+function isIOS() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+function isMobileView() {
+  return window.matchMedia('(max-width: 1024px)').matches;
+}
+/* ── Filtro de categorías ────────────────────────────────────── */
+function filterCategory(category, btn) {
+  document.querySelectorAll('.section').forEach(s => {
+    s.classList.toggle('hidden', category !== 'all' && s.id !== category);
+  });
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (category !== 'all') {
+    document.getElementById(category).scrollIntoView({ behavior: 'smooth' });
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+/* ── Miniatura (poster) ─────────────────────────────────────── */
+function loadVideoPoster(side) {
+  /* Si se especifica data-poster en el HTML se usa como fondo del overlay.
+     El fetch a canva.com/_oembed fue eliminado: Canva bloquea esa petición
+     con CORS (403) desde la mayoría de los dominios de hosting. */
+  if (side.dataset.poster) {
+    side.querySelector('.video-placeholder').style.backgroundImage =
+      `url('${side.dataset.poster}')`;
+    side.classList.add('has-poster');
+  }
+}
+
+/* ── Sonido iOS ─────────────────────────────────────────────── */
+function showSoundHint(side) {
+  const wrap = side.querySelector('.video-iframe-wrap');
+  if (wrap.querySelector('.sound-hint')) return;
+  const hint = document.createElement('div');
+  hint.className = 'sound-hint';
+  hint.textContent = '🔊 Sin sonido? Toca el video y sube el volumen';
+  wrap.appendChild(hint);
+  requestAnimationFrame(() => hint.classList.add('show'));
+  setTimeout(() => { hint.classList.remove('show'); setTimeout(() => hint.remove(), 400); }, 5000);
+}
+
+/* ── Gestión del video ──────────────────────────────────────── */
+
+/*
+ * ESTRATEGIA DE AUDIO EN MÓVIL:
+ * iOS Safari y Android Chrome bloquean el audio en iframes cross-origin
+ * que se cargan sin un gesto directo del usuario. Si el iframe lo carga
+ * el IntersectionObserver (sin toque), el navegador no otorga permiso
+ * de audio y el video reproduce sin sonido.
+ *
+ * Solución híbrida:
+ *  - Escritorio: IntersectionObserver precarga el iframe en segundo plano
+ *    (1 solo clic en el player de Canva, sonido ok porque el clic dentro
+ *    del iframe es el gesto de usuario).
+ *  - Móvil: el iframe se carga SOLO desde el toque del usuario en nuestra
+ *    overlay, garantizando el contexto de gesto → el navegador permite audio.
+ */
+
+const IS_TOUCH = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+function startLoad(side) {
+  if (side.dataset.loadStarted) return;
+  side.dataset.loadStarted = '1';
+
+  const iframe = side.querySelector('iframe');
+  iframe.src = side.dataset.src;
+  side.classList.add('is-loading');
+
+  iframe.addEventListener('load', () => {
+    side.classList.remove('is-loading');
+    side.classList.add('is-playing');
+    if (side.dataset.userWaiting) {
+      delete side.dataset.userWaiting;
+      if (isIOS()) showSoundHint(side);
+    }
+  }, { once: true });
+}
+
+function onUserTap(side) {
+  // Si el player ya está visible, no hacer nada más
+  if (side.classList.contains('is-playing')) return;
+
+  /*
+   * Marcar que el toque vino del usuario.
+   * En móvil, esto garantiza que iframe.src se asigna dentro del
+   * stack del evento touch → el navegador propaga el permiso de audio.
+   */
+  side.dataset.userWaiting = '1';
+
+  if (isMobileView()) {
+    side.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  startLoad(side);
+}
+
+function closeVideo(side) {
+  side.classList.remove('is-playing', 'is-loading');
+  delete side.dataset.loadStarted;
+  delete side.dataset.userWaiting;
+  const iframe = side.querySelector('iframe');
+  if (iframe) iframe.src = '';
+  side.querySelector('.sound-hint')?.remove();
+  if (!IS_TOUCH) videoObserver.observe(side); // solo re-observar en escritorio
+}
+
+/* ── IntersectionObserver: precarga solo en escritorio ─────── */
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    videoObserver.unobserve(entry.target);
+    startLoad(entry.target);
+  });
+}, { threshold: 0.15, rootMargin: '120px 0px' });
+
+/* ── Eventos y setup ─────────────────────────────────────────── */
+function setupVideo(side) {
+  const placeholder = side.querySelector('.video-placeholder');
+  const closeBtn    = side.querySelector('.video-close-btn');
+  let touchFired    = false;
+
+  placeholder.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    touchFired = true;
+    onUserTap(side);           // llamado sincrónicamente dentro del evento touch
+    setTimeout(() => { touchFired = false; }, 600);
+  }, { passive: false });
+
+  placeholder.addEventListener('click', () => {
+    if (touchFired) return;
+    onUserTap(side);
+  });
+
+  closeBtn.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeVideo(side);
+  }, { passive: false });
+
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeVideo(side);
+  });
+
+  // Solo precargar automáticamente en escritorio (sin touch)
+  if (!IS_TOUCH) videoObserver.observe(side);
+}
+
+/* ── Init ────────────────────────────────────────────────────── */
+document.querySelectorAll('.video-side[data-src]').forEach(side => {
+  loadVideoPoster(side);
+  setupVideo(side);
+});
+
+document.querySelectorAll('.video-side:not([data-src]) .play-btn').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const note = this.closest('.video-placeholder').querySelector('.video-note');
+    if (note) note.textContent = 'Agregue el enlace del video en el código HTML';
+    this.style.opacity = '0.5';
+  });
+});
+</script>
+</body>
+</html>
