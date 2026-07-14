@@ -54,7 +54,7 @@ main{max-width:1100px;margin:0 auto;padding:48px 32px 60px}
 .video-placeholder{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px;background:#000 center/contain no-repeat;transition:opacity .3s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
 .video-placeholder::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(91,45,142,0.25) 0%,rgba(45,27,61,0.55) 100%);z-index:0}
 .video-placeholder > *{position:relative;z-index:1}
-.video-side[data-src] .video-placeholder{cursor:pointer}
+.video-side[data-video] .video-placeholder{cursor:pointer}
 
 /* Botón de reproducir */
 .play-btn{width:72px;height:72px;border-radius:50%;background:rgba(212,86,140,0.35);border:2.5px solid var(--pink);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;backdrop-filter:blur(2px);flex-shrink:0;position:relative}
@@ -73,12 +73,13 @@ main{max-width:1100px;margin:0 auto;padding:48px 32px 60px}
 .video-note-mobile{display:none}
 .video-note-desktop{display:block}
 
-/* iframe siempre presente en el DOM (z-index bajo), se eleva al reproducir */
-.video-iframe-wrap{position:absolute;inset:0;z-index:2;width:100%;height:100%;background:#000;-webkit-overflow-scrolling:touch;overflow:hidden;display:block;opacity:0;pointer-events:none;transition:opacity .25s}
+/* Contenedor del video nativo — oculto hasta que el usuario toca ── */
+.video-player-wrap{position:absolute;inset:0;z-index:2;width:100%;height:100%;background:#000;display:block;opacity:0;pointer-events:none;transition:opacity .25s}
 .video-side.is-playing::before{display:none}
 .video-side.is-playing .video-placeholder{pointer-events:none;opacity:0}
-.video-side.is-playing .video-iframe-wrap{opacity:1;pointer-events:auto}
-.video-iframe-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block;background:#000}
+.video-side.is-playing .video-player-wrap{opacity:1;pointer-events:auto}
+/* playsinline es clave en iOS para reproducir en línea sin forzar pantalla completa */
+.video-player-wrap video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;display:block}
 .video-close-btn{display:none;position:absolute;top:12px;right:12px;z-index:10;width:44px;height:44px;border:none;border-radius:50%;background:rgba(0,0,0,0.65);color:#fff;font-size:1.35rem;line-height:1;cursor:pointer;align-items:center;justify-content:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .video-side.is-playing .video-close-btn{display:flex}
 .info-side{padding:28px 30px;display:flex;flex-direction:column;gap:18px}
@@ -95,10 +96,6 @@ main{max-width:1100px;margin:0 auto;padding:48px 32px 60px}
 
 /* ── SPIN keyframe ── */
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-/* ── SOUND HINT (iOS) ── */
-.sound-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.72);color:#fff;padding:7px 18px;border-radius:20px;font-size:0.8rem;white-space:nowrap;z-index:20;opacity:0;transition:opacity .35s;pointer-events:none;backdrop-filter:blur(4px)}
-.sound-hint.show{opacity:1}
 
 /* ── FOOTER ── */
 footer{background:linear-gradient(135deg,var(--purple) 0%,#6A3588 100%);color:#D4A8CC;text-align:center;padding:28px 24px;font-size:0.92rem}
@@ -177,15 +174,15 @@ footer strong{color:#fff}
     <div class="tutorials">
 
       <div class="tcard">
-        <div class="video-side" data-src="https://www.canva.com/design/DAHOeOmKvg0/LLOVM2bC7_2FyWCUgtzttQ/watch?embed&utm_content=DAHOeOmKvg0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h139c84040c">
+        <div class="video-side" data-video="videos/edus-contrasena.mp4">
           <div class="video-placeholder">
             <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             <div class="video-title">¿Cómo cambiar mi<br>contraseña de EDUS?</div>
             <div class="video-note video-note-desktop">Video tutorial · grabación de pantalla</div>
             <div class="video-note video-note-mobile">Toca ▶ para reproducir</div>
           </div>
-          <div class="video-iframe-wrap">
-            <iframe title="¿Cómo cambiar mi contraseña de EDUS?" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; web-share" allowfullscreen></iframe>
+          <div class="video-player-wrap">
+            <video playsinline controls preload="none"></video>
           </div>
           <button type="button" class="video-close-btn" aria-label="Cerrar video">✕</button>
         </div>
@@ -212,15 +209,15 @@ footer strong{color:#fff}
       </div>
 
       <div class="tcard">
-        <div class="video-side" data-src="https://www.canva.com/design/DAHOfYKK_UA/KP25LIaCEXHSX_PcKie0mg/watch?embed&utm_content=DAHOfYKK_UA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h106169e77e">
+        <div class="video-side" data-video="videos/edus-recetas.mp4">
           <div class="video-placeholder">
             <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             <div class="video-title">¿Cómo pedir mis recetas<br>médicas por EDUS?</div>
             <div class="video-note video-note-desktop">Video tutorial · grabación de pantalla</div>
             <div class="video-note video-note-mobile">Toca ▶ para reproducir</div>
           </div>
-          <div class="video-iframe-wrap">
-            <iframe title="¿Cómo pedir mis recetas médicas por EDUS?" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; web-share" allowfullscreen></iframe>
+          <div class="video-player-wrap">
+            <video playsinline controls preload="none"></video>
           </div>
           <button type="button" class="video-close-btn" aria-label="Cerrar video">✕</button>
         </div>
@@ -259,15 +256,15 @@ footer strong{color:#fff}
     <div class="tutorials">
 
       <div class="tcard">
-        <div class="video-side" data-src="https://www.canva.com/design/DAHOfVcCN2c/ZJ4GhXN09VxILDjrwtOiqg/watch?embed&utm_content=DAHOfVcCN2c&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hf2a79d14ba">
+        <div class="video-side" data-video="videos/bn-contrasena.mp4">
           <div class="video-placeholder">
             <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             <div class="video-title">¿Cómo cambiar mi contraseña<br>en la app del BN?</div>
             <div class="video-note video-note-desktop">Video tutorial · grabación de pantalla</div>
             <div class="video-note video-note-mobile">Toca ▶ para reproducir</div>
           </div>
-          <div class="video-iframe-wrap">
-            <iframe title="¿Cómo cambiar mi contraseña en la aplicación del Banco Nacional?" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; web-share" allowfullscreen></iframe>
+          <div class="video-player-wrap">
+            <video playsinline controls preload="none"></video>
           </div>
           <button type="button" class="video-close-btn" aria-label="Cerrar video">✕</button>
         </div>
@@ -306,15 +303,15 @@ footer strong{color:#fff}
     <div class="tutorials">
 
       <div class="tcard">
-        <div class="video-side" data-src="https://www.canva.com/design/DAHOfYmKX_o/MUJtOlWRUjjmWONQS2nKxw/watch?embed&utm_content=DAHOfYmKX_o&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6909ba2e31">
+        <div class="video-side" data-video="videos/uber-paradas.mp4">
           <div class="video-placeholder">
             <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             <div class="video-title">¿Cómo añadir múltiples<br>paradas en Uber?</div>
             <div class="video-note video-note-desktop">Video tutorial · grabación de pantalla</div>
             <div class="video-note video-note-mobile">Toca ▶ para reproducir</div>
           </div>
-          <div class="video-iframe-wrap">
-            <iframe title="¿Cómo añadir múltiples paradas en Uber?" allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; web-share" allowfullscreen></iframe>
+          <div class="video-player-wrap">
+            <video playsinline controls preload="none"></video>
           </div>
           <button type="button" class="video-close-btn" aria-label="Cerrar video">✕</button>
         </div>
@@ -345,13 +342,6 @@ footer strong{color:#fff}
 </footer>
 
 <script>
-/* ── Utilidades ─────────────────────────────────────────────── */
-function isIOS() {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-}
-function isMobileView() {
-  return window.matchMedia('(max-width: 1024px)').matches;
-}
 /* ── Filtro de categorías ────────────────────────────────────── */
 function filterCategory(category, btn) {
   document.querySelectorAll('.section').forEach(s => {
@@ -366,120 +356,66 @@ function filterCategory(category, btn) {
   }
 }
 
-/* ── Miniatura (poster) ─────────────────────────────────────── */
-function loadVideoPoster(side) {
-  /* Si se especifica data-poster en el HTML se usa como fondo del overlay.
-     El fetch a canva.com/_oembed fue eliminado: Canva bloquea esa petición
-     con CORS (403) desde la mayoría de los dominios de hosting. */
-  if (side.dataset.poster) {
-    side.querySelector('.video-placeholder').style.backgroundImage =
-      `url('${side.dataset.poster}')`;
-    side.classList.add('has-poster');
-  }
-}
-
-/* ── Sonido iOS ─────────────────────────────────────────────── */
-function showSoundHint(side) {
-  const wrap = side.querySelector('.video-iframe-wrap');
-  if (wrap.querySelector('.sound-hint')) return;
-  const hint = document.createElement('div');
-  hint.className = 'sound-hint';
-  hint.textContent = '🔊 Sin sonido? Toca el video y sube el volumen';
-  wrap.appendChild(hint);
-  requestAnimationFrame(() => hint.classList.add('show'));
-  setTimeout(() => { hint.classList.remove('show'); setTimeout(() => hint.remove(), 400); }, 5000);
-}
-
-/* ── Gestión del video ──────────────────────────────────────── */
-
+/* ── Reproducción con <video> nativo ────────────────────────── */
 /*
- * ESTRATEGIA DE AUDIO EN MÓVIL:
- * iOS Safari y Android Chrome bloquean el audio en iframes cross-origin
- * que se cargan sin un gesto directo del usuario. Si el iframe lo carga
- * el IntersectionObserver (sin toque), el navegador no otorga permiso
- * de audio y el video reproduce sin sonido.
- *
- * Solución híbrida:
- *  - Escritorio: IntersectionObserver precarga el iframe en segundo plano
- *    (1 solo clic en el player de Canva, sonido ok porque el clic dentro
- *    del iframe es el gesto de usuario).
- *  - Móvil: el iframe se carga SOLO desde el toque del usuario en nuestra
- *    overlay, garantizando el contexto de gesto → el navegador permite audio.
+ * Al usar <video> en lugar de <iframe> de Canva:
+ * - El audio funciona en todos los dispositivos sin restricciones
+ * - No hay problemas de cross-origin
+ * - playsinline evita que iOS fuerce pantalla completa
+ * - El src se asigna sincrónicamente en el toque → audio garantizado
  */
 
-const IS_TOUCH = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-
-function startLoad(side) {
-  if (side.dataset.loadStarted) return;
-  side.dataset.loadStarted = '1';
-
-  const iframe = side.querySelector('iframe');
-  iframe.src = side.dataset.src;
-  side.classList.add('is-loading');
-
-  iframe.addEventListener('load', () => {
-    side.classList.remove('is-loading');
-    side.classList.add('is-playing');
-    if (side.dataset.userWaiting) {
-      delete side.dataset.userWaiting;
-      if (isIOS()) showSoundHint(side);
-    }
-  }, { once: true });
-}
-
-function onUserTap(side) {
-  // Si el player ya está visible, no hacer nada más
+function playVideo(side) {
   if (side.classList.contains('is-playing')) return;
 
-  /*
-   * Marcar que el toque vino del usuario.
-   * En móvil, esto garantiza que iframe.src se asigna dentro del
-   * stack del evento touch → el navegador propaga el permiso de audio.
-   */
-  side.dataset.userWaiting = '1';
+  const video = side.querySelector('video');
+  const path  = side.dataset.video;
+  if (!path) return;
 
-  if (isMobileView()) {
-    side.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  // Asignar src sincrónicamente dentro del evento del usuario
+  if (!video.src || !video.src.endsWith(path)) {
+    video.src = path;
   }
 
-  startLoad(side);
+  side.classList.add('is-playing');
+
+  video.play().catch(() => {
+    // El navegador rechazó el autoplay (muy raro con gesto directo).
+    // Los controles nativos del video quedan visibles para que el usuario toque ▶
+  });
+
+  if (window.matchMedia('(max-width:1024px)').matches) {
+    side.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
 function closeVideo(side) {
+  const video = side.querySelector('video');
+  if (video) { video.pause(); video.src = ''; video.load(); }
   side.classList.remove('is-playing', 'is-loading');
-  delete side.dataset.loadStarted;
-  delete side.dataset.userWaiting;
-  const iframe = side.querySelector('iframe');
-  if (iframe) iframe.src = '';
-  side.querySelector('.sound-hint')?.remove();
-  if (!IS_TOUCH) videoObserver.observe(side); // solo re-observar en escritorio
 }
 
-/* ── IntersectionObserver: precarga solo en escritorio ─────── */
-const videoObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    videoObserver.unobserve(entry.target);
-    startLoad(entry.target);
-  });
-}, { threshold: 0.15, rootMargin: '120px 0px' });
-
-/* ── Eventos y setup ─────────────────────────────────────────── */
 function setupVideo(side) {
   const placeholder = side.querySelector('.video-placeholder');
   const closeBtn    = side.querySelector('.video-close-btn');
+  const video       = side.querySelector('video');
   let touchFired    = false;
+
+  /* Mostrar spinner mientras el video bufferiza */
+  video.addEventListener('waiting', () => side.classList.add('is-loading'));
+  video.addEventListener('playing', () => side.classList.remove('is-loading'));
+  video.addEventListener('canplay', () => side.classList.remove('is-loading'));
 
   placeholder.addEventListener('touchend', (e) => {
     e.preventDefault();
     touchFired = true;
-    onUserTap(side);           // llamado sincrónicamente dentro del evento touch
+    playVideo(side);
     setTimeout(() => { touchFired = false; }, 600);
   }, { passive: false });
 
   placeholder.addEventListener('click', () => {
     if (touchFired) return;
-    onUserTap(side);
+    playVideo(side);
   });
 
   closeBtn.addEventListener('touchend', (e) => {
@@ -493,24 +429,15 @@ function setupVideo(side) {
     closeVideo(side);
   });
 
-  // Solo precargar automáticamente en escritorio (sin touch)
-  if (!IS_TOUCH) videoObserver.observe(side);
+  /* Imagen de portada si se define data-poster en el HTML */
+  if (side.dataset.poster) {
+    placeholder.style.backgroundImage = `url('${side.dataset.poster}')`;
+    side.classList.add('has-poster');
+    video.poster = side.dataset.poster;
+  }
 }
 
-/* ── Init ────────────────────────────────────────────────────── */
-document.querySelectorAll('.video-side[data-src]').forEach(side => {
-  loadVideoPoster(side);
-  setupVideo(side);
-});
-
-document.querySelectorAll('.video-side:not([data-src]) .play-btn').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    const note = this.closest('.video-placeholder').querySelector('.video-note');
-    if (note) note.textContent = 'Agregue el enlace del video en el código HTML';
-    this.style.opacity = '0.5';
-  });
-});
+document.querySelectorAll('.video-side[data-video]').forEach(side => setupVideo(side));
 </script>
 </body>
 </html>
